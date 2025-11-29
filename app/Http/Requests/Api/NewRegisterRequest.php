@@ -16,9 +16,7 @@ class NewRegisterRequest extends FormRequest
                 'string',
                 'regex:/^([0-9\s\-\+\(\)]*)$/',
                 'min:7',
-                Rule::unique('users')->where(function ($query) {
-                    return $query->where('active', true);
-                })
+                'unique:registration_requests'
             ],
             'national_id' => [
                 'required',

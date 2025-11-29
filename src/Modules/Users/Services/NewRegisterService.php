@@ -17,7 +17,8 @@ class NewRegisterService
         ]);
 
         $documents = $this->uploadDocuments($registerRequest->id, $dto->getDocuments());
-
+        $registerRequest->documents = $documents;
+        $registerRequest->save();
         return $registerRequest->fresh();
     }
 
