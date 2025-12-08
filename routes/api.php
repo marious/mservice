@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BlogsController;
+use App\Http\Controllers\Api\CoursesController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\NewRegisterController;
@@ -37,6 +38,13 @@ Route::middleware(ValidateHeadersMiddleware::class)->prefix('v1')->group(functio
         Route::prefix('services')->group(function () {
             Route::controller(ServicesController::class)->group(function () {
                 Route::get('/', 'index');
+            });
+        });
+
+        Route::prefix('courses')->group(function () {
+            Route::controller(CoursesController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::get('/{course}', 'show');
             });
         });
     });
