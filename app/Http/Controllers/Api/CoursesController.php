@@ -30,7 +30,21 @@ class CoursesController extends Controller
         }
 
         return response()->json([
-            'courses' => CoursesResource::collection($courses)
+            'courses' => CoursesResource::collection($courses),
+            'types' => [
+                [
+                    'key' => 'attend',
+                    'value' => __('attend'),
+                ],
+                [
+                    'key' => 'online',
+                    'value' => __('online'),
+                ],
+                [
+                    'key' => 'hybrid',
+                    'value' => __('hybrid'),
+                ]
+            ],
         ]);
     }
 

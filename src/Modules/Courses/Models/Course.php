@@ -19,6 +19,7 @@ class Course extends CustomModel implements HasMedia
         'start_date' => 'date',
         'end_date' => 'date',
         'is_active' => 'boolean',
+        'is_featured' => 'boolean',
     ];
     public $translatable = ['title', 'description'];
 

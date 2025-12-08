@@ -1,5 +1,9 @@
 {
   "attend": "حضورى",
   "online": "اونلاين",
-  "hybrid": "هيبرد"
+  "hybrid": "هيبرد",
+  "doctor": "دكتور",
+  "hospital": "مستشفى",
+  "special clinic": "عيادة خاصة",
+  "special clinics": "عيادات تخصصية"
 }

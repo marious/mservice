@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\BlogsController;
 use App\Http\Controllers\Api\CoursesController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\MedicalGuideController;
 use App\Http\Controllers\Api\NewRegisterController;
 use App\Http\Controllers\Api\OtpSendController;
 use App\Http\Controllers\Api\RegisterController;
@@ -55,6 +56,12 @@ Route::middleware(ValidateHeadersMiddleware::class)->prefix('v1')->group(functio
         Route::controller(CoursesController::class)->group(function () {
             Route::get('/', 'index');
             Route::get('/{course}', 'show');
+        });
+    });
+
+    Route::prefix('medical-guides')->group(function () {
+        Route::controller(MedicalGuideController::class)->group(function () {
+            Route::get('/', 'index');
         });
     });
 
