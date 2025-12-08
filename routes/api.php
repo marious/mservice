@@ -41,12 +41,6 @@ Route::middleware(ValidateHeadersMiddleware::class)->prefix('v1')->group(functio
             });
         });
 
-        Route::prefix('courses')->group(function () {
-            Route::controller(CoursesController::class)->group(function () {
-                Route::get('/', 'index');
-                Route::get('/{course}', 'show');
-            });
-        });
     });
 
 
@@ -54,6 +48,13 @@ Route::middleware(ValidateHeadersMiddleware::class)->prefix('v1')->group(functio
         Route::controller(BlogsController::class)->group(function () {
             Route::get('/', 'index');
             Route::get('/{slug}', 'show');
+        });
+    });
+
+    Route::prefix('courses')->group(function () {
+        Route::controller(CoursesController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::get('/{course}', 'show');
         });
     });
 
