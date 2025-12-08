@@ -27,6 +27,7 @@ class HomeController extends Controller
             $featuredServices = $this->services->getFeaturedServices(6);
             return response()->json([
                 'user' => NormalUserResource::make($user),
+                'main_image' => ['url' => null],
                 'featured_services' => ServicesResource::collection($featuredServices),
                 'normal_services' => ServicesResource::collection($normalServices),
             ]);
@@ -34,6 +35,7 @@ class HomeController extends Controller
 
         return response()->json([
             'user' => null,
+            'main_image' => ['url' => null],
             'normal_services' => ServicesResource::collection($normalServices),
             'news' => BlogResource::collection(Blog::latest()->limit(2)->get()),
         ]);
