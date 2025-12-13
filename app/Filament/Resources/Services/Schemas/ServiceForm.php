@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Blogs\Schemas;
+namespace App\Filament\Resources\Services\Schemas;
 
 use AbdulmajeedJamaan\FilamentTranslatableTabs\TranslatableTabs;
 use Filament\Forms\Components\Checkbox;
@@ -8,10 +8,9 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\View;
 use Filament\Schemas\Schema;
 
-class BlogForm
+class ServiceForm
 {
     public static function configure(Schema $schema): Schema
     {
@@ -21,16 +20,12 @@ class BlogForm
                     ->schema([
                         TextInput::make("title")->required(),
                         Textarea::make("description")->required(),
-                        RichEditor::make("content")
-                            ->extraAttributes([
-                                'style' => 'min-height: 300px;',
-                            ])->required(),
                     ])
                     ->columnSpanFull(),
-                FileUpload::make('image')
-                    ->label('Image')
+                FileUpload::make('icon')
+                    ->label('Icon')
                     ->image()
-                    ->directory('blogs')
+                    ->directory('services')
                     ->visibility('public')
                     ->acceptedFileTypes(['image/*'])
                     ->maxSize(5120)
@@ -48,7 +43,8 @@ class BlogForm
                     ->disk('public')
                     ->preserveFilenames()
                     ->columnSpanFull(),
-                Checkbox::make('is_published')
+                Checkbox::make('is_active'),
+                Checkbox::make('is_featured')
             ]);
     }
 }
