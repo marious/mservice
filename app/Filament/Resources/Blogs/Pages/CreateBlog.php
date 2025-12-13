@@ -10,26 +10,8 @@ class CreateBlog extends CreateRecord
 {
     protected static string $resource = BlogResource::class;
 
-    protected $imageData = null;
-
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        // Store image temporarily and remove from data
-        $this->imageData = $data['image'] ?? null;
-        unset($data['image']);
-
-        // Ensure translatable fields are arrays, not false
-        $translatableFields = ['title', 'description', 'content'];
-        
-        foreach ($translatableFields as $field) {
-            if (!isset($data[$field]) || $data[$field] === false) {
-                $data[$field] = [];
-            } elseif (!is_array($data[$field])) {
-                // If it's a string, convert to array with default locale
-                $data[$field] = [app()->getLocale() => $data[$field]];
-            }
-        }
-
         // Generate slug from title if not provided
         if (!isset($data['slug']) || $data['slug'] === false || empty($data['slug'])) {
             $data['slug'] = [];
@@ -60,45 +42,9 @@ class CreateBlog extends CreateRecord
         return $data;
     }
 
-    protected function afterCreate(): void
+
+    protected function getRedirectUrl(): string
     {
-        $this->handleImageUpload();
-    }
-
-    protected function handleImageUpload(): void
-    {
-        $image = $this->imageData ?? null;
-        
-        if (empty($image)) {
-            return;
-        }
-
-        // Handle array of file paths (Filament FileUpload returns array)
-        if (is_array($image) && !empty($image)) {
-            $filePath = $image[0];
-        } elseif (is_string($image)) {
-            $filePath = $image;
-        } else {
-            return;
-        }
-
-        // Skip if it's a URL (existing media from edit)
-        if (str_starts_with($filePath, 'http://') || str_starts_with($filePath, 'https://')) {
-            return;
-        }
-
-        // Check if it's a relative path (starts with 'blogs/')
-        if (str_starts_with($filePath, 'blogs/')) {
-            $fullPath = storage_path('app/public/' . $filePath);
-            
-            if (file_exists($fullPath)) {
-                try {
-                    $this->record->addMedia($fullPath)
-                        ->toMediaCollection('image');
-                } catch (\Exception $e) {
-                    \Log::error('Failed to add media: ' . $e->getMessage());
-                }
-            }
-        }
+        return $this->getResource()::getUrl('index');
     }
 }

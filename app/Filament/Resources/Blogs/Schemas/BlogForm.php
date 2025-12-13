@@ -6,6 +6,7 @@ use AbdulmajeedJamaan\FilamentTranslatableTabs\TranslatableTabs;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\View;
@@ -27,26 +28,9 @@ class BlogForm
                             ])->required(),
                     ])
                     ->columnSpanFull(),
-                FileUpload::make('image')
-                    ->label('Image')
-                    ->image()
+                SpatieMediaLibraryFileUpload::make('image')
+                    ->collection('image')
                     ->directory('blogs')
-                    ->visibility('public')
-                    ->acceptedFileTypes(['image/*'])
-                    ->maxSize(5120)
-                    ->imageEditor()
-                    ->openable()
-                    ->downloadable()
-                    ->previewable()
-                    ->deletable()
-                    ->loadingIndicatorPosition('left')
-                    ->panelAspectRatio('5:1')
-                    ->panelLayout('integrated')
-                    ->removeUploadedFileButtonPosition('right')
-                    ->uploadButtonPosition('left')
-                    ->uploadProgressIndicatorPosition('left')
-                    ->disk('public')
-                    ->preserveFilenames()
                     ->columnSpanFull(),
                 Checkbox::make('is_published')
             ]);

@@ -28,6 +28,7 @@ class ManagePanelProvider extends PanelProvider
             ->id('manage')
             ->path('manage')
             ->login()
+            ->viteTheme('resources/css/filament/manage/theme.css')
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -39,7 +40,7 @@ class ManagePanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
+//                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
