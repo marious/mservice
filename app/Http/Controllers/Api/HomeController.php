@@ -30,7 +30,7 @@ class HomeController extends Controller
 
         if (Auth::guard('sanctum')->check()) {
             $user = Auth::guard('sanctum')->user();
-            $featuredServices = $this->services->getFeaturedServices(6);
+//            $featuredServices = $this->services->getFeaturedServices(6);
             return response()->json([
                 'user' => NormalUserResource::make($user),
                 'banner' => $mainImages,
