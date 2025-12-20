@@ -4,6 +4,8 @@ namespace Modules\Users\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @property mixed $lang
@@ -15,13 +17,16 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $email
  * @property string $phone
  * @property string $name
+ * @property string|null $address
+ * @property string|null $neqaba_address
  */
-class User extends Authenticatable
+class User extends Authenticatable implements  HasMedia
 {
-    use HasApiTokens;
+    use HasApiTokens, InteractsWithMedia;
 
     protected $fillable = [
         'name', 'phone', 'email', 'password', 'national_id', 'reg_number', 'role_id', 'active', 'lang', 'notification_enabled',
+        'address', 'neqaba_address',
     ];
 
     protected $hidden = [
