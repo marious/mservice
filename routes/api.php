@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\MedicalGuideController;
 use App\Http\Controllers\Api\NewRegisterController;
 use App\Http\Controllers\Api\OtpSendController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Middleware\ValidateHeadersMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -31,11 +32,12 @@ Route::middleware(ValidateHeadersMiddleware::class)->prefix('v1')->group(functio
             Route::post('login', 'login');
             Route::post('logout', 'logout')->middleware('auth:sanctum');
         });
-
     });
 
     // Authed Routes
     Route::middleware('auth:sanctum')->group(function () {
+        Route::post('settings', [SettingsController::class, 'update']);
+
         Route::prefix('services')->group(function () {
             Route::controller(ServicesController::class)->group(function () {
                 Route::get('/', 'index');

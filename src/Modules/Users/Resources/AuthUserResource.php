@@ -15,6 +15,10 @@ class AuthUserResource extends CustomResource
             'phone' => $this->resource->phone,
             'national_id' => $this->resource->national_id,
             'reg_number' => $this->resource->reg_number,
+            'settings' => [
+                'lang' => $this->resource->lang,
+                'notification_enabled' => $this->resource->notification_enabled,
+            ],
             'auth_token' => $this->resource->auth_token,
         ];
     }
