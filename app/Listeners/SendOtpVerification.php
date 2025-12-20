@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\OtpEventInterface;
 use App\Events\UserRegistered;
 use Modules\Core\Enums\OtpEnum;
 use Modules\Core\Services\OtpService;
@@ -15,15 +16,16 @@ class SendOtpVerification
         protected OtpService $otpService
     )
     {
-        //
     }
 
     /**
      * Handle the event.
      */
-    public function handle(UserRegistered $event): void
+    public function handle(OtpEventInterface $event): void
     {
         $user = $event->user;
-        $this->otpService->generatePhoneOtp($user->phone, OtpEnum::REGISTER->value);
+        $type = $event?->type ?? OtpEnum::REGISTER->value;
+        $phone = $event?->phone ?? $user->phone;
+        $this->otpService->generatePhoneOtp($phone, $type);
     }
 }
