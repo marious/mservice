@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BlogsController;
+use App\Http\Controllers\Api\ChangePasswordController;
 use App\Http\Controllers\Api\CoursesController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\LoginController;
@@ -39,6 +40,7 @@ Route::middleware(ValidateHeadersMiddleware::class)->prefix('v1')->group(functio
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('settings', [SettingsController::class, 'update']);
         Route::post('profile/update', [ProfileController::class, 'update']);
+        Route::post('auth/change-password', ChangePasswordController::class);
 
         Route::prefix('services')->group(function () {
             Route::controller(ServicesController::class)->group(function () {

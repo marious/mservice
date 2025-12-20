@@ -17,6 +17,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property string $email
  * @property string $phone
  * @property string $name
+ * @property string $password
  * @property string|null $address
  * @property string|null $neqaba_address
  */
