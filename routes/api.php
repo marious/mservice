@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\NewRegisterController;
 use App\Http\Controllers\Api\OtpSendController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\RestUnitsController;
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Middleware\ValidateHeadersMiddleware;
@@ -49,6 +50,9 @@ Route::middleware(ValidateHeadersMiddleware::class)->prefix('v1')->group(functio
             Route::controller(ServicesController::class)->group(function () {
                 Route::get('/', 'index');
             });
+
+            Route::get('/rest-units', [RestUnitsController::class, 'index']);
+            Route::post('rest-units/subscribe', [RestUnitsController::class, 'subscribe']);
         });
 
     });

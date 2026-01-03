@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Filament\Resources\ResetUnits\Schemas;
+
+use AbdulmajeedJamaan\FilamentTranslatableTabs\TranslatableTabs;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
+
+class ResetUnitForm
+{
+    public static function configure(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                TranslatableTabs::make('Reset Unit')
+                    ->schema([
+                        TextInput::make('name')->label(__('Name'))->required(),
+                        TextInput::make('address')->label('Address')->required(),
+                    ])
+                    ->columnSpanFull(),
+                TextInput::make('single_rooms')->label(__('Single Rooms'))->numeric()->required()->columnSpanFull(),
+                TextInput::make('double_rooms')->label(__('Double Rooms'))->numeric()->required()->columnSpanFull(),
+                TextInput::make('single_bed')->label(__('Single Beds'))->numeric()->required()->columnSpanFull(),
+                Select::make('province_id')
+                    ->relationship('province', 'name')
+                    ->label(__('Province'))
+                    ->required(),
+                Checkbox::make('is_active')->columnSpanFull()
+            ]);
+    }
+}
